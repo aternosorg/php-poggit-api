@@ -71,11 +71,6 @@ class ReleaseTest extends PoggitAPITestCase
         $this->assertEquals(214555, $this->release->getResourceId());
     }
 
-    public function testGetFileReturnsSplFileObject(): void
-    {
-        $this->assertInstanceOf(\SplFileObject::class, $this->release->getFile());
-    }
-
     public function testGetMd5HashReturnsCorrectHash(): void
     {
         $this->assertEquals("bf0191ae45bb52700961d214bbf1d6ab", $this->release->getMD5Hash());

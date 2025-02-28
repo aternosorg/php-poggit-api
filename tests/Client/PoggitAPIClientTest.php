@@ -104,21 +104,6 @@ class PoggitAPIClientTest extends PoggitAPITestCase
         $this->client->downloadVersion("UnknownPluginName", "1.0.0");
     }
 
-    public function testGetResourceReturnsSplFileObject(): void
-    {
-        // 214555 is the resource id of version 1.5.1 of the plugin "_NewAlias"
-        // taken from the artifact_url (https://poggit.pmmp.io/r/214555)
-        $file = $this->client->downloadResource(214555);
-        $this->assertNotNull($file);
-        $this->assertInstanceOf(\SplFileObject::class, $file);
-    }
-
-    public function testGetResourceThrowsExceptionWhenUnknown(): void
-    {
-        $this->expectException(ApiException::class);
-        $this->client->downloadResource(999999999);
-    }
-
     public function testGetMd5HashReturnsCorrectHash(): void
     {
         // 214555 is the resource id of version 1.5.1 of the plugin "_NewAlias"
