@@ -16,14 +16,14 @@ class SearchOptions
     protected ?State $minState = null;
 
     /**
-     * Name
+     * The plugin name
      *
      * @var string|null
      */
     protected ?string $name = null;
 
     /**
-     * Version
+     * Version string. Must be used in combination with {@link $name}
      *
      * @var string|null
      */
@@ -100,7 +100,7 @@ class SearchOptions
     }
 
     /**
-     * Set the version string
+     * Set the version string. Must be used in combination with {@link setName()}
      * @param string|null $version
      * @return $this
      */
