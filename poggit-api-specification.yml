@@ -171,62 +171,6 @@ paths:
             text/plain:
               schema:
                 type: string
-  /r/{resource}:
-    get:
-      summary: Get resource
-      description: Get a resource
-      operationId: getResource
-      parameters:
-        - name: resource
-          in: path
-          description: Resource path
-          required: true
-          schema:
-            type: string
-        - name: access_token
-          in: query
-          description: Access token
-          required: false
-          schema:
-            type: string
-        - name: Authorization
-          in: header
-          description: Authorization for access token
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Hash
-          content:
-            text/plain:
-              schema:
-                type: string
-                format: binary
-        "400":
-          description: Bad request
-          content:
-            text/html:
-              schema:
-                type: string
-        "401":
-          description: Unauthorized
-          content:
-            text/html:
-              schema:
-                type: string
-        "404":
-          description: Not found
-          content:
-            text/plain:
-              schema:
-                type: string
-        "410":
-          description: Expired
-          content:
-            text/plain:
-              schema:
-                type: string
   /r.md5/{resource}:
     get:
       summary: Get MD5 hash

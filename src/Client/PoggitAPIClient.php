@@ -142,18 +142,6 @@ class PoggitAPIClient
     }
 
     /**
-     * Downloads a resource and returns the corresponding {@link SplFileObject}.
-     *
-     * @param int $id
-     * @return SplFileObject
-     * @throws ApiException
-     */
-    public function downloadResource(int $id): SplFileObject
-    {
-        return $this->api->getResource($id);
-    }
-
-    /**
      * Get the MD5 hash of the resource with the given resource ID
      *
      * @param int $resourceId
