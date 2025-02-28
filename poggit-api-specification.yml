@@ -1,0 +1,580 @@
+openapi: 3.0.1
+info:
+  title: Poggit API
+  version: "1.0"
+servers:
+  - url: https://poggit.pmmp.io
+    description: Poggit API
+paths:
+  /pmapis:
+    get:
+      summary: Retrieve a list of pocketmine API versions
+      operationId: getApiVersions
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/ApiVersion'
+  /releases.list:
+    get:
+      summary: Retrieve a plugin list
+      description: You may retrieve a list of voted/approved plugins using this endpoint (along with some aliases which are functionally identical)
+      operationId: getReleases
+      parameters:
+        - name: id
+          in: query
+          description: Release ID
+          required: false
+          schema:
+            type: integer
+        - name: min-state
+          in: query
+          description: Min state
+          required: false
+          schema:
+            $ref: '#/components/schemas/State'
+        - name: name
+          in: query
+          description: Release name
+          required: false
+          schema:
+            type: string
+        - name: version
+          in: query
+          description: Release version
+          required: false
+          schema:
+            type: string
+            format: version
+        - name: category
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/CategoryId'
+        - name: repo_owner
+          in: query
+          description: Repository owner
+          required: false
+          schema:
+            type: string
+        - name: latest-only
+          in: query
+          description: If set to any value other than 'off' this _should_ only show the latest version of each project
+          required: false
+          schema:
+            type: string
+            example: "off"
+        - name: fields
+          in: query
+          description: List of fields to include in response
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Release'
+        "400":
+          description: Bad request
+          content:
+            text/html:
+              schema:
+                type: string
+  /get/{name}/{version}:
+    get:
+      summary: Get a version
+      description: Get a version of a resource
+      operationId: getVersion
+      parameters:
+        - name: name
+          in: path
+          description: Resource name
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: path
+          description: Resource version
+          required: true
+          schema:
+            type: string
+            format: version
+        - name: prerelease
+          in: query
+          description: Get pre releases?
+          required: false
+          schema:
+            type: string
+            example: "off"
+        - name: state
+          in: query
+          description: State
+          required: false
+          schema:
+            $ref: '#/components/schemas/State'
+        - name: api
+          in: query
+          description: API Version
+          required: false
+          schema:
+            type: string
+            format: version
+
+      responses:
+        "200":
+          description: Downloaded file
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: binary
+          headers:
+            X-Poggit-Resolved-Version:
+              schema:
+                type: string
+                format: version
+            X-Poggit-Resolved-Release-Date:
+              schema:
+                type: string
+                format: date-time
+            X-Poggit-Resolved-State-Change-Date:
+              schema:
+                type: string
+                format: date-time
+            X-Poggit-Resolved-Is-Prerelease:
+              schema:
+                type: boolean
+            X-Poggit-Resolved-State:
+              description: State in human readable format
+              schema:
+                type: string
+        "400":
+          description: Bad request
+          content:
+            text/html:
+              schema:
+                type: string
+        "404":
+          description: No release found matching the conditions
+          content:
+            text/plain:
+              schema:
+                type: string
+  /r/{resource}:
+    get:
+      summary: Get resource
+      description: Get a resource
+      operationId: getResource
+      parameters:
+        - name: resource
+          in: path
+          description: Resource path
+          required: true
+          schema:
+            type: string
+        - name: access_token
+          in: query
+          description: Access token
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Authorization for access token
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Hash
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: Bad request
+          content:
+            text/html:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            text/html:
+              schema:
+                type: string
+        "404":
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                type: string
+        "410":
+          description: Expired
+          content:
+            text/plain:
+              schema:
+                type: string
+  /r.md5/{resource}:
+    get:
+      summary: Get MD5 hash
+      description: Get a MD5 hash of a resource
+      operationId: getMd5
+      parameters:
+        - name: resource
+          in: path
+          description: Resource path
+          required: true
+          schema:
+            type: string
+        - name: access_token
+          in: query
+          description: Access token
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Authorization for access token
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Hash
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: md5
+        "400":
+          description: Bad request
+          content:
+            text/html:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            text/html:
+              schema:
+                type: string
+        "404":
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                type: string
+        "410":
+          description: Expired
+          content:
+            text/plain:
+              schema:
+                type: string
+  /r.sha1/{resource}:
+    get:
+      summary: Get SHA1 hash
+      description: Get a SHA1 hash of a resource
+      operationId: getSha1
+      parameters:
+        - name: resource
+          in: path
+          description: Resource path
+          required: true
+          schema:
+            type: string
+        - name: access_token
+          in: query
+          description: Access token
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Authorization for access token
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Hash
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: sha1
+        "400":
+          description: Bad request
+          content:
+            text/html:
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+          content:
+            text/html:
+              schema:
+                type: string
+        "404":
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                type: string
+        "410":
+          description: Expired
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    ApiVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+        description:
+          description: A string array describing significant API changes in this version.
+          type: array
+          items:
+            type: string
+        php:
+          description: The minimum minor PHP version required by this version, in each PHP major version.
+          type: array
+          items:
+            type: string
+        incompatible:
+          description: >
+            For the nth version, if incompatible is false, any plugins that support the (n-1)th version should also support it.
+            This also indicates that if a plugin declares support for a certaion version, it also supports the subsequent versions until the next one with incompatible: true.
+          type: boolean
+        indev:
+          description: Whether the API has been finalized.
+          type: boolean
+        supported:
+          type: boolean
+        phar:
+          $ref: '#/components/schemas/PharList'
+    PharList:
+      description: This is an object, where the default attribute is a link to a PocketMine-MP.phar of that API version. More links may be added in the future.
+      type: object
+      properties:
+        default:
+          type: string
+          nullable: true
+    Release:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        version:
+          type: string
+          format: version
+        html_url:
+          type: string
+          format: uri
+        tagline:
+          type: string
+        artifact_url:
+          type: string
+          format: uri
+        downloads:
+          type: integer
+        score:
+          type: integer
+        repo_id:
+          type: integer
+        repo_name:
+          type: string
+        project_id:
+          type: integer
+        project_name:
+          type: string
+        build_id:
+          type: integer
+        build_number:
+          type: integer
+        build_commit:
+          type: string
+        description_url:
+          type: string
+          format: uri
+        icon_url:
+          type: string
+          format: uri
+        changelog_url:
+          type: string
+          format: uri
+        license:
+          type: string
+        license_url:
+          type: string
+          format: uri
+        is_obsolete:
+          type: boolean
+        is_pre_release:
+          type: boolean
+        is_outdated:
+          type: boolean
+        is_official:
+          type: boolean
+        submission_date:
+          type: integer
+          description: Date as unix timestamp
+        state:
+          $ref: '#/components/schemas/State'
+        last_changed_date:
+          type: integer
+          description: Date as unix timestamp
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryName'
+        keywords:
+          type: array
+          items:
+            type: string
+        api:
+          type: array
+          items:
+            type: object
+            properties:
+              from:
+                type: string
+                format: version
+              to:
+                type: string
+                format: version
+        deps:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dependency'
+        producers:
+          type: object
+          properties:
+            Contributor:
+              type: array
+              items:
+                type: string
+            Collaborator:
+              type: array
+              items:
+                type: string
+        state_name:
+          type: string
+    CategoryName:
+      type: object
+      properties:
+        major:
+          type: boolean
+        category_name:
+          type: string
+          enum:
+            - General
+            - Admin Tools
+            - Informational
+            - Anti-Griefing Tools
+            - Chat-Related
+            - Teleportation
+            - Mechanics
+            - Economy
+            - Minigame
+            - Fun
+            - World Editing and Management
+            - World Generators
+            - Developer Tools
+            - Educational
+            - Miscellaneous
+            - API plugins
+            - Vanilla Mechanics
+    Dependency:
+      type: object
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+          format: version
+        depRelId:
+          type: integer
+        isHard:
+          type: boolean
+    State:
+      type: integer
+      description: >
+        0 = DRAFT
+        1 = REJECTED
+        2 = SUBMITTED
+        3 = CHECKED
+        4 = VOTED
+        5 = APPROVED
+        6 = FEATURED
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      x-enum-varnames:
+        - DRAFT
+        - REJECTED
+        - SUBMITTED
+        - CHECKED
+        - VOTED
+        - APPROVED
+        - FEATURED
+    CategoryId:
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+      x-enum-varnames:
+        - GENERAL
+        - ADMIN_TOOLS
+        - INFORMATIONAL
+        - ANTI_GRIEFING_TOOLS
+        - CHAT_RELATED
+        - TELEPORTATION
+        - MECHANICS
+        - ECONOMY
+        - MINIGAME
+        - FUN
+        - WORLD_EDITING_AND_MANAGEMENT
+        - WORLD_GENERATORS
+        - DEVELOPER_TOOLS
+        - EDUCATIONAL
+        - MISCELLANEOUS
+        - API_PLUGINS
+        - VANILLA_MECHANICS

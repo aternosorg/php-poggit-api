@@ -1,0 +1,6 @@
+invokerPackage: Aternos\PoggitApi
+artifactVersion: 0.2.0
+generatorName: php-nextgen
+outputDir: .
+sourceFolder: src
+inputSpec: poggit-api-specification.yml
