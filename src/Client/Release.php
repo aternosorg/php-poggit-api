@@ -100,17 +100,6 @@ class Release
     }
 
     /**
-     * Returns the file of this plugin version as a {@link SplFileObject}.
-     *
-     * @return SplFileObject
-     * @throws ApiException
-     */
-    public function getFile(): SplFileObject
-    {
-        return $this->client->downloadResource($this->getResourceId());
-    }
-
-    /**
      * Returns the MD5 hash for the file of this plugin version.
      *
      * @return string
