@@ -167,7 +167,7 @@ class PoggitAPIClient
     }
 
     /**
-     * Get an overview of all API versions
+     * Get an overview of all PocketMine (not Poggit) API versions
      * @return ApiVersionsOverview
      */
     public function getApiVersions(): ApiVersionsOverview
