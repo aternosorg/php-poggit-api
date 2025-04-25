@@ -1,6 +1,6 @@
 <?php
 /**
- * PharList
+ * ApiVersionsOverview
  *
  * PHP version 8.1
  *
@@ -34,15 +34,14 @@ use ReturnTypeWillChange;
 use Aternos\PoggitApi\ObjectSerializer;
 
 /**
- * PharList Class Doc Comment
+ * ApiVersionsOverview Class Doc Comment
  *
- * @description This is an object, where the default attribute is a link to a PocketMine-MP.phar of that API version. More links may be added in the future.
  * @package  Aternos\PoggitApi
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class PharList implements ModelInterface, ArrayAccess, JsonSerializable
+class ApiVersionsOverview implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static string $openAPIModelName = 'PharList';
+    protected static string $openAPIModelName = 'ApiVersionsOverview';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,11 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'default' => 'string'
+        'promoted' => 'string',
+        'promoted_compat' => 'string',
+        'latest' => 'string',
+        'latest_compat' => 'string',
+        'versions' => 'array<string,\Aternos\PoggitApi\Model\ApiVersion>'
     ];
 
     /**
@@ -68,7 +71,11 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'default' => null
+        'promoted' => null,
+        'promoted_compat' => null,
+        'latest' => null,
+        'latest_compat' => null,
+        'versions' => null
     ];
 
     /**
@@ -77,7 +84,11 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'default' => true
+        'promoted' => false,
+        'promoted_compat' => false,
+        'latest' => false,
+        'latest_compat' => false,
+        'versions' => false
     ];
 
     /**
@@ -166,7 +177,11 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'default' => 'default'
+        'promoted' => 'promoted',
+        'promoted_compat' => 'promotedCompat',
+        'latest' => 'latest',
+        'latest_compat' => 'latestCompat',
+        'versions' => 'versions'
     ];
 
     /**
@@ -175,7 +190,11 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $setters = [
-        'default' => 'setDefault'
+        'promoted' => 'setPromoted',
+        'promoted_compat' => 'setPromotedCompat',
+        'latest' => 'setLatest',
+        'latest_compat' => 'setLatestCompat',
+        'versions' => 'setVersions'
     ];
 
     /**
@@ -184,7 +203,11 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $getters = [
-        'default' => 'getDefault'
+        'promoted' => 'getPromoted',
+        'promoted_compat' => 'getPromotedCompat',
+        'latest' => 'getLatest',
+        'latest_compat' => 'getLatestCompat',
+        'versions' => 'getVersions'
     ];
 
     /**
@@ -243,7 +266,11 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('default', $data ?? [], null);
+        $this->setIfExists('promoted', $data ?? [], null);
+        $this->setIfExists('promoted_compat', $data ?? [], null);
+        $this->setIfExists('latest', $data ?? [], null);
+        $this->setIfExists('latest_compat', $data ?? [], null);
+        $this->setIfExists('versions', $data ?? [], null);
     }
 
     /**
@@ -273,8 +300,20 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['default'] === null) {
-            $invalidProperties[] = "'default' can't be null";
+        if ($this->container['promoted'] === null) {
+            $invalidProperties[] = "'promoted' can't be null";
+        }
+        if ($this->container['promoted_compat'] === null) {
+            $invalidProperties[] = "'promoted_compat' can't be null";
+        }
+        if ($this->container['latest'] === null) {
+            $invalidProperties[] = "'latest' can't be null";
+        }
+        if ($this->container['latest_compat'] === null) {
+            $invalidProperties[] = "'latest_compat' can't be null";
+        }
+        if ($this->container['versions'] === null) {
+            $invalidProperties[] = "'versions' can't be null";
         }
         return $invalidProperties;
     }
@@ -292,35 +331,136 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets default
+     * Gets promoted
      *
      * @return string
      */
-    public function getDefault(): ?string
+    public function getPromoted(): string
     {
-        return $this->container['default'];
+        return $this->container['promoted'];
     }
 
     /**
-     * Sets default
+     * Sets promoted
      *
-     * @param string $default default
+     * @param string $promoted promoted
      *
      * @return $this
      */
-    public function setDefault(?string $default): static
+    public function setPromoted(string $promoted): static
     {
-        if (is_null($default)) {
-            array_push($this->openAPINullablesSetToNull, 'default');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('default', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($promoted)) {
+            throw new InvalidArgumentException('non-nullable promoted cannot be null');
         }
-        $this->container['default'] = $default;
+        $this->container['promoted'] = $promoted;
+
+        return $this;
+    }
+
+    /**
+     * Gets promoted_compat
+     *
+     * @return string
+     */
+    public function getPromotedCompat(): string
+    {
+        return $this->container['promoted_compat'];
+    }
+
+    /**
+     * Sets promoted_compat
+     *
+     * @param string $promoted_compat promoted_compat
+     *
+     * @return $this
+     */
+    public function setPromotedCompat(string $promoted_compat): static
+    {
+        if (is_null($promoted_compat)) {
+            throw new InvalidArgumentException('non-nullable promoted_compat cannot be null');
+        }
+        $this->container['promoted_compat'] = $promoted_compat;
+
+        return $this;
+    }
+
+    /**
+     * Gets latest
+     *
+     * @return string
+     */
+    public function getLatest(): string
+    {
+        return $this->container['latest'];
+    }
+
+    /**
+     * Sets latest
+     *
+     * @param string $latest latest
+     *
+     * @return $this
+     */
+    public function setLatest(string $latest): static
+    {
+        if (is_null($latest)) {
+            throw new InvalidArgumentException('non-nullable latest cannot be null');
+        }
+        $this->container['latest'] = $latest;
+
+        return $this;
+    }
+
+    /**
+     * Gets latest_compat
+     *
+     * @return string
+     */
+    public function getLatestCompat(): string
+    {
+        return $this->container['latest_compat'];
+    }
+
+    /**
+     * Sets latest_compat
+     *
+     * @param string $latest_compat latest_compat
+     *
+     * @return $this
+     */
+    public function setLatestCompat(string $latest_compat): static
+    {
+        if (is_null($latest_compat)) {
+            throw new InvalidArgumentException('non-nullable latest_compat cannot be null');
+        }
+        $this->container['latest_compat'] = $latest_compat;
+
+        return $this;
+    }
+
+    /**
+     * Gets versions
+     *
+     * @return array<string,\Aternos\PoggitApi\Model\ApiVersion>
+     */
+    public function getVersions(): array
+    {
+        return $this->container['versions'];
+    }
+
+    /**
+     * Sets versions
+     *
+     * @param array<string,\Aternos\PoggitApi\Model\ApiVersion> $versions versions
+     *
+     * @return $this
+     */
+    public function setVersions(array $versions): static
+    {
+        if (is_null($versions)) {
+            throw new InvalidArgumentException('non-nullable versions cannot be null');
+        }
+        $this->container['versions'] = $versions;
 
         return $this;
     }

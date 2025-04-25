@@ -5,6 +5,7 @@ namespace Aternos\PoggitApi\Client;
 use Aternos\PoggitApi\Api\DefaultApi;
 use Aternos\PoggitApi\ApiException;
 use Aternos\PoggitApi\Configuration;
+use Aternos\PoggitApi\Model\ApiVersionsOverview;
 use Aternos\PoggitApi\Model\Release as ReleaseModel;
 use GuzzleHttp\ClientInterface;
 use SplFileObject;
@@ -163,5 +164,14 @@ class PoggitAPIClient
     public function getSHA1Hash(int $resourceId): string
     {
         return $this->api->getSha1($resourceId);
+    }
+
+    /**
+     * Get an overview of all API versions
+     * @return ApiVersionsOverview
+     */
+    public function getApiVersions(): ApiVersionsOverview
+    {
+        return $this->api->getApiVersionsFull();
     }
 }

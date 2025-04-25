@@ -6,6 +6,7 @@ use Aternos\PoggitApi\ApiException;
 use Aternos\PoggitApi\Client\Plugin;
 use Aternos\PoggitApi\Client\Release;
 use Aternos\PoggitApi\Client\SearchOptions;
+use Aternos\PoggitApi\Model\ApiVersion;
 use Aternos\PoggitApi\Model\CategoryId;
 use Aternos\PoggitApi\Model\State;
 use Aternos\PoggitApi\Test\PoggitAPITestCase;
@@ -144,5 +145,19 @@ class PoggitAPIClientTest extends PoggitAPITestCase
         $releases = $this->client->getReleases();
         $this->assertIsArray($releases);
         $this->assertEmpty($releases);
+    }
+
+    public function testGetApiVersions(): void
+    {
+        $apiVersions = $this->client->getApiVersions();
+        $this->assertNotNull($apiVersions);
+        $this->assertIsArray($apiVersions->getVersions());
+        $this->assertNotEmpty($apiVersions->getVersions());
+        foreach ($apiVersions->getVersions() as $version => $data) {
+            $this->assertIsString($version);
+            $this->assertInstanceOf(ApiVersion::class, $data);
+            $this->assertNotNull($data->getId());
+            $this->assertNotNull($data->getSupported());
+        }
     }
 }

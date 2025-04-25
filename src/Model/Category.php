@@ -1,6 +1,6 @@
 <?php
 /**
- * PharList
+ * Category
  *
  * PHP version 8.1
  *
@@ -34,15 +34,14 @@ use ReturnTypeWillChange;
 use Aternos\PoggitApi\ObjectSerializer;
 
 /**
- * PharList Class Doc Comment
+ * Category Class Doc Comment
  *
- * @description This is an object, where the default attribute is a link to a PocketMine-MP.phar of that API version. More links may be added in the future.
  * @package  Aternos\PoggitApi
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class PharList implements ModelInterface, ArrayAccess, JsonSerializable
+class Category implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
       *
       * @var string
       */
-    protected static string $openAPIModelName = 'PharList';
+    protected static string $openAPIModelName = 'Category';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +58,8 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'default' => 'string'
+        'major' => 'bool',
+        'category_name' => '\Aternos\PoggitApi\Model\CategoryName'
     ];
 
     /**
@@ -68,7 +68,8 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'default' => null
+        'major' => null,
+        'category_name' => null
     ];
 
     /**
@@ -77,7 +78,8 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'default' => true
+        'major' => false,
+        'category_name' => false
     ];
 
     /**
@@ -166,7 +168,8 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'default' => 'default'
+        'major' => 'major',
+        'category_name' => 'category_name'
     ];
 
     /**
@@ -175,7 +178,8 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $setters = [
-        'default' => 'setDefault'
+        'major' => 'setMajor',
+        'category_name' => 'setCategoryName'
     ];
 
     /**
@@ -184,7 +188,8 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $getters = [
-        'default' => 'getDefault'
+        'major' => 'getMajor',
+        'category_name' => 'getCategoryName'
     ];
 
     /**
@@ -243,7 +248,8 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('default', $data ?? [], null);
+        $this->setIfExists('major', $data ?? [], null);
+        $this->setIfExists('category_name', $data ?? [], null);
     }
 
     /**
@@ -273,8 +279,11 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['default'] === null) {
-            $invalidProperties[] = "'default' can't be null";
+        if ($this->container['major'] === null) {
+            $invalidProperties[] = "'major' can't be null";
+        }
+        if ($this->container['category_name'] === null) {
+            $invalidProperties[] = "'category_name' can't be null";
         }
         return $invalidProperties;
     }
@@ -292,35 +301,55 @@ class PharList implements ModelInterface, ArrayAccess, JsonSerializable
 
 
     /**
-     * Gets default
+     * Gets major
      *
-     * @return string
+     * @return bool
      */
-    public function getDefault(): ?string
+    public function getMajor(): bool
     {
-        return $this->container['default'];
+        return $this->container['major'];
     }
 
     /**
-     * Sets default
+     * Sets major
      *
-     * @param string $default default
+     * @param bool $major major
      *
      * @return $this
      */
-    public function setDefault(?string $default): static
+    public function setMajor(bool $major): static
     {
-        if (is_null($default)) {
-            array_push($this->openAPINullablesSetToNull, 'default');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('default', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($major)) {
+            throw new InvalidArgumentException('non-nullable major cannot be null');
         }
-        $this->container['default'] = $default;
+        $this->container['major'] = $major;
+
+        return $this;
+    }
+
+    /**
+     * Gets category_name
+     *
+     * @return \Aternos\PoggitApi\Model\CategoryName
+     */
+    public function getCategoryName(): \Aternos\PoggitApi\Model\CategoryName
+    {
+        return $this->container['category_name'];
+    }
+
+    /**
+     * Sets category_name
+     *
+     * @param \Aternos\PoggitApi\Model\CategoryName $category_name category_name
+     *
+     * @return $this
+     */
+    public function setCategoryName(\Aternos\PoggitApi\Model\CategoryName $category_name): static
+    {
+        if (is_null($category_name)) {
+            throw new InvalidArgumentException('non-nullable category_name cannot be null');
+        }
+        $this->container['category_name'] = $category_name;
 
         return $this;
     }

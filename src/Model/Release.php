@@ -85,7 +85,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         'submission_date' => 'int',
         'state' => '\Aternos\PoggitApi\Model\State',
         'last_state_change_date' => 'int',
-        'categories' => '\Aternos\PoggitApi\Model\CategoryName[]',
+        'categories' => '\Aternos\PoggitApi\Model\Category[]',
         'keywords' => 'string[]',
         'api' => '\Aternos\PoggitApi\Model\ReleaseApiInner[]',
         'deps' => '\Aternos\PoggitApi\Model\Dependency[]',
@@ -1333,7 +1333,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets categories
      *
-     * @return \Aternos\PoggitApi\Model\CategoryName[]
+     * @return \Aternos\PoggitApi\Model\Category[]
      */
     public function getCategories(): array
     {
@@ -1343,7 +1343,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets categories
      *
-     * @param \Aternos\PoggitApi\Model\CategoryName[] $categories categories
+     * @param \Aternos\PoggitApi\Model\Category[] $categories categories
      *
      * @return $this
      */

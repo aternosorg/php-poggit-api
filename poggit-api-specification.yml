@@ -6,7 +6,7 @@ servers:
   - url: https://poggit.pmmp.io
     description: Poggit API
 paths:
-  /pmapis:
+  /pmapis.min:
     get:
       summary: Retrieve a list of pocketmine API versions
       operationId: getApiVersions
@@ -19,7 +19,18 @@ paths:
                 type: object
                 additionalProperties:
                   $ref: '#/components/schemas/ApiVersion'
-  /releases.list:
+  /pmapis.full.min:
+    get:
+      summary: Retrieve a list of pocketmine API versions
+      operationId: getApiVersionsFull
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiVersionsOverview'
+  /releases.min.json:
     get:
       summary: Retrieve a plugin list
       description: You may retrieve a list of voted/approved plugins using this endpoint (along with some aliases which are functionally identical)
@@ -285,6 +296,31 @@ paths:
                 type: string
 components:
   schemas:
+    ApiVersionsOverview:
+      type: object
+      properties:
+        promoted:
+          type: string
+          example: "5.27.1"
+        promotedCompat:
+          type: string
+          example: "5.0.0"
+        latest:
+          type: string
+          example: "5.27.1"
+        latestCompat:
+          type: string
+          example: "5.0.0"
+        versions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ApiVersion'
+      required:
+        - promoted
+        - promotedCompat
+        - latest
+        - latestCompat
+        - versions
     ApiVersion:
       type: object
       properties:
@@ -312,6 +348,14 @@ components:
           type: boolean
         phar:
           $ref: '#/components/schemas/PharList'
+      required:
+        - id
+        - description
+        - php
+        - incompatible
+        - indev
+        - supported
+        - phar
     PharList:
       description: This is an object, where the default attribute is a link to a PocketMine-MP.phar of that API version. More links may be added in the future.
       type: object
@@ -319,6 +363,8 @@ components:
         default:
           type: string
           nullable: true
+      required:
+        - default
     Release:
       type: object
       properties:
@@ -388,7 +434,7 @@ components:
         categories:
           type: array
           items:
-            $ref: '#/components/schemas/CategoryName'
+            $ref: '#/components/schemas/Category'
         keywords:
           type: array
           items:
@@ -452,31 +498,36 @@ components:
         - deps
         - producers
         - state_name
-    CategoryName:
+    Category:
       type: object
       properties:
         major:
           type: boolean
         category_name:
-          type: string
-          enum:
-            - General
-            - Admin Tools
-            - Informational
-            - Anti-Griefing Tools
-            - Chat-Related
-            - Teleportation
-            - Mechanics
-            - Economy
-            - Minigame
-            - Fun
-            - World Editing and Management
-            - World Generators
-            - Developer Tools
-            - Educational
-            - Miscellaneous
-            - API plugins
-            - Vanilla Mechanics
+          $ref: '#/components/schemas/CategoryName'
+      required:
+        - major
+        - category_name
+    CategoryName:
+      type: string
+      enum:
+        - General
+        - Admin Tools
+        - Informational
+        - Anti-Griefing Tools
+        - Chat-Related
+        - Teleportation
+        - Mechanics
+        - Economy
+        - Minigame
+        - Fun
+        - World Editing and Management
+        - World Generators
+        - Developer Tools
+        - Educational
+        - Miscellaneous
+        - API plugins
+        - Vanilla Mechanics
     Dependency:
       type: object
       properties:

@@ -314,6 +314,27 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['description'] === null) {
+            $invalidProperties[] = "'description' can't be null";
+        }
+        if ($this->container['php'] === null) {
+            $invalidProperties[] = "'php' can't be null";
+        }
+        if ($this->container['incompatible'] === null) {
+            $invalidProperties[] = "'incompatible' can't be null";
+        }
+        if ($this->container['indev'] === null) {
+            $invalidProperties[] = "'indev' can't be null";
+        }
+        if ($this->container['supported'] === null) {
+            $invalidProperties[] = "'supported' can't be null";
+        }
+        if ($this->container['phar'] === null) {
+            $invalidProperties[] = "'phar' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -332,9 +353,9 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets id
      *
-     * @return int|null
+     * @return int
      */
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->container['id'];
     }
@@ -342,11 +363,11 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets id
      *
-     * @param int|null $id id
+     * @param int $id id
      *
      * @return $this
      */
-    public function setId(?int $id): static
+    public function setId(int $id): static
     {
         if (is_null($id)) {
             throw new InvalidArgumentException('non-nullable id cannot be null');
@@ -359,9 +380,9 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets description
      *
-     * @return string[]|null
+     * @return string[]
      */
-    public function getDescription(): ?array
+    public function getDescription(): array
     {
         return $this->container['description'];
     }
@@ -369,11 +390,11 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets description
      *
-     * @param string[]|null $description A string array describing significant API changes in this version.
+     * @param string[] $description A string array describing significant API changes in this version.
      *
      * @return $this
      */
-    public function setDescription(?array $description): static
+    public function setDescription(array $description): static
     {
         if (is_null($description)) {
             throw new InvalidArgumentException('non-nullable description cannot be null');
@@ -386,9 +407,9 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets php
      *
-     * @return string[]|null
+     * @return string[]
      */
-    public function getPhp(): ?array
+    public function getPhp(): array
     {
         return $this->container['php'];
     }
@@ -396,11 +417,11 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets php
      *
-     * @param string[]|null $php The minimum minor PHP version required by this version, in each PHP major version.
+     * @param string[] $php The minimum minor PHP version required by this version, in each PHP major version.
      *
      * @return $this
      */
-    public function setPhp(?array $php): static
+    public function setPhp(array $php): static
     {
         if (is_null($php)) {
             throw new InvalidArgumentException('non-nullable php cannot be null');
@@ -413,9 +434,9 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets incompatible
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getIncompatible(): ?bool
+    public function getIncompatible(): bool
     {
         return $this->container['incompatible'];
     }
@@ -423,11 +444,11 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets incompatible
      *
-     * @param bool|null $incompatible For the nth version, if incompatible is false, any plugins that support the (n-1)th version should also support it. This also indicates that if a plugin declares support for a certaion version, it also supports the subsequent versions until the next one with incompatible: true.
+     * @param bool $incompatible For the nth version, if incompatible is false, any plugins that support the (n-1)th version should also support it. This also indicates that if a plugin declares support for a certaion version, it also supports the subsequent versions until the next one with incompatible: true.
      *
      * @return $this
      */
-    public function setIncompatible(?bool $incompatible): static
+    public function setIncompatible(bool $incompatible): static
     {
         if (is_null($incompatible)) {
             throw new InvalidArgumentException('non-nullable incompatible cannot be null');
@@ -440,9 +461,9 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets indev
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getIndev(): ?bool
+    public function getIndev(): bool
     {
         return $this->container['indev'];
     }
@@ -450,11 +471,11 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets indev
      *
-     * @param bool|null $indev Whether the API has been finalized.
+     * @param bool $indev Whether the API has been finalized.
      *
      * @return $this
      */
-    public function setIndev(?bool $indev): static
+    public function setIndev(bool $indev): static
     {
         if (is_null($indev)) {
             throw new InvalidArgumentException('non-nullable indev cannot be null');
@@ -467,9 +488,9 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets supported
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getSupported(): ?bool
+    public function getSupported(): bool
     {
         return $this->container['supported'];
     }
@@ -477,11 +498,11 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets supported
      *
-     * @param bool|null $supported supported
+     * @param bool $supported supported
      *
      * @return $this
      */
-    public function setSupported(?bool $supported): static
+    public function setSupported(bool $supported): static
     {
         if (is_null($supported)) {
             throw new InvalidArgumentException('non-nullable supported cannot be null');
@@ -494,9 +515,9 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets phar
      *
-     * @return \Aternos\PoggitApi\Model\PharList|null
+     * @return \Aternos\PoggitApi\Model\PharList
      */
-    public function getPhar(): ?\Aternos\PoggitApi\Model\PharList
+    public function getPhar(): \Aternos\PoggitApi\Model\PharList
     {
         return $this->container['phar'];
     }
@@ -504,11 +525,11 @@ class ApiVersion implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets phar
      *
-     * @param \Aternos\PoggitApi\Model\PharList|null $phar phar
+     * @param \Aternos\PoggitApi\Model\PharList $phar phar
      *
      * @return $this
      */
-    public function setPhar(?\Aternos\PoggitApi\Model\PharList $phar): static
+    public function setPhar(\Aternos\PoggitApi\Model\PharList $phar): static
     {
         if (is_null($phar)) {
             throw new InvalidArgumentException('non-nullable phar cannot be null');
