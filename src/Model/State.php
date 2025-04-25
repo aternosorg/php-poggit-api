@@ -45,8 +45,6 @@ enum State: int
 
     case CHECKED = 3;
 
-    case VOTED = 4;
-
     case APPROVED = 5;
 
     case FEATURED = 6;
