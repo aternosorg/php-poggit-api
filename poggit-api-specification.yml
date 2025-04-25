@@ -382,7 +382,7 @@ components:
           description: Date as unix timestamp
         state:
           $ref: '#/components/schemas/State'
-        last_changed_date:
+        last_state_change_date:
           type: integer
           description: Date as unix timestamp
         categories:
@@ -421,6 +421,37 @@ components:
                 type: string
         state_name:
           type: string
+      required:
+        - id
+        - name
+        - version
+        - html_url
+        - tagline
+        - artifact_url
+        - downloads
+        - score
+        - repo_id
+        - repo_name
+        - project_id
+        - project_name
+        - build_id
+        - build_number
+        - build_commit
+        - description_url
+        - icon_url
+        - is_obsolete
+        - is_pre_release
+        - is_outdated
+        - is_official
+        - submission_date
+        - state
+        - last_state_change_date
+        - categories
+        - keywords
+        - api
+        - deps
+        - producers
+        - state_name
     CategoryName:
       type: object
       properties:

@@ -84,7 +84,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         'is_official' => 'bool',
         'submission_date' => 'int',
         'state' => '\Aternos\PoggitApi\Model\State',
-        'last_changed_date' => 'int',
+        'last_state_change_date' => 'int',
         'categories' => '\Aternos\PoggitApi\Model\CategoryName[]',
         'keywords' => 'string[]',
         'api' => '\Aternos\PoggitApi\Model\ReleaseApiInner[]',
@@ -125,7 +125,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         'is_official' => null,
         'submission_date' => null,
         'state' => null,
-        'last_changed_date' => null,
+        'last_state_change_date' => null,
         'categories' => null,
         'keywords' => null,
         'api' => null,
@@ -166,7 +166,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         'is_official' => false,
         'submission_date' => false,
         'state' => false,
-        'last_changed_date' => false,
+        'last_state_change_date' => false,
         'categories' => false,
         'keywords' => false,
         'api' => false,
@@ -287,7 +287,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         'is_official' => 'is_official',
         'submission_date' => 'submission_date',
         'state' => 'state',
-        'last_changed_date' => 'last_changed_date',
+        'last_state_change_date' => 'last_state_change_date',
         'categories' => 'categories',
         'keywords' => 'keywords',
         'api' => 'api',
@@ -328,7 +328,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         'is_official' => 'setIsOfficial',
         'submission_date' => 'setSubmissionDate',
         'state' => 'setState',
-        'last_changed_date' => 'setLastChangedDate',
+        'last_state_change_date' => 'setLastStateChangeDate',
         'categories' => 'setCategories',
         'keywords' => 'setKeywords',
         'api' => 'setApi',
@@ -369,7 +369,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         'is_official' => 'getIsOfficial',
         'submission_date' => 'getSubmissionDate',
         'state' => 'getState',
-        'last_changed_date' => 'getLastChangedDate',
+        'last_state_change_date' => 'getLastStateChangeDate',
         'categories' => 'getCategories',
         'keywords' => 'getKeywords',
         'api' => 'getApi',
@@ -460,7 +460,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         $this->setIfExists('is_official', $data ?? [], null);
         $this->setIfExists('submission_date', $data ?? [], null);
         $this->setIfExists('state', $data ?? [], null);
-        $this->setIfExists('last_changed_date', $data ?? [], null);
+        $this->setIfExists('last_state_change_date', $data ?? [], null);
         $this->setIfExists('categories', $data ?? [], null);
         $this->setIfExists('keywords', $data ?? [], null);
         $this->setIfExists('api', $data ?? [], null);
@@ -496,6 +496,96 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
+        if ($this->container['html_url'] === null) {
+            $invalidProperties[] = "'html_url' can't be null";
+        }
+        if ($this->container['tagline'] === null) {
+            $invalidProperties[] = "'tagline' can't be null";
+        }
+        if ($this->container['artifact_url'] === null) {
+            $invalidProperties[] = "'artifact_url' can't be null";
+        }
+        if ($this->container['downloads'] === null) {
+            $invalidProperties[] = "'downloads' can't be null";
+        }
+        if ($this->container['score'] === null) {
+            $invalidProperties[] = "'score' can't be null";
+        }
+        if ($this->container['repo_id'] === null) {
+            $invalidProperties[] = "'repo_id' can't be null";
+        }
+        if ($this->container['repo_name'] === null) {
+            $invalidProperties[] = "'repo_name' can't be null";
+        }
+        if ($this->container['project_id'] === null) {
+            $invalidProperties[] = "'project_id' can't be null";
+        }
+        if ($this->container['project_name'] === null) {
+            $invalidProperties[] = "'project_name' can't be null";
+        }
+        if ($this->container['build_id'] === null) {
+            $invalidProperties[] = "'build_id' can't be null";
+        }
+        if ($this->container['build_number'] === null) {
+            $invalidProperties[] = "'build_number' can't be null";
+        }
+        if ($this->container['build_commit'] === null) {
+            $invalidProperties[] = "'build_commit' can't be null";
+        }
+        if ($this->container['description_url'] === null) {
+            $invalidProperties[] = "'description_url' can't be null";
+        }
+        if ($this->container['icon_url'] === null) {
+            $invalidProperties[] = "'icon_url' can't be null";
+        }
+        if ($this->container['is_obsolete'] === null) {
+            $invalidProperties[] = "'is_obsolete' can't be null";
+        }
+        if ($this->container['is_pre_release'] === null) {
+            $invalidProperties[] = "'is_pre_release' can't be null";
+        }
+        if ($this->container['is_outdated'] === null) {
+            $invalidProperties[] = "'is_outdated' can't be null";
+        }
+        if ($this->container['is_official'] === null) {
+            $invalidProperties[] = "'is_official' can't be null";
+        }
+        if ($this->container['submission_date'] === null) {
+            $invalidProperties[] = "'submission_date' can't be null";
+        }
+        if ($this->container['state'] === null) {
+            $invalidProperties[] = "'state' can't be null";
+        }
+        if ($this->container['last_state_change_date'] === null) {
+            $invalidProperties[] = "'last_state_change_date' can't be null";
+        }
+        if ($this->container['categories'] === null) {
+            $invalidProperties[] = "'categories' can't be null";
+        }
+        if ($this->container['keywords'] === null) {
+            $invalidProperties[] = "'keywords' can't be null";
+        }
+        if ($this->container['api'] === null) {
+            $invalidProperties[] = "'api' can't be null";
+        }
+        if ($this->container['deps'] === null) {
+            $invalidProperties[] = "'deps' can't be null";
+        }
+        if ($this->container['producers'] === null) {
+            $invalidProperties[] = "'producers' can't be null";
+        }
+        if ($this->container['state_name'] === null) {
+            $invalidProperties[] = "'state_name' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -514,9 +604,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets id
      *
-     * @return int|null
+     * @return int
      */
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->container['id'];
     }
@@ -524,11 +614,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets id
      *
-     * @param int|null $id id
+     * @param int $id id
      *
      * @return $this
      */
-    public function setId(?int $id): static
+    public function setId(int $id): static
     {
         if (is_null($id)) {
             throw new InvalidArgumentException('non-nullable id cannot be null');
@@ -541,9 +631,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets name
      *
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->container['name'];
     }
@@ -551,11 +641,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string $name name
      *
      * @return $this
      */
-    public function setName(?string $name): static
+    public function setName(string $name): static
     {
         if (is_null($name)) {
             throw new InvalidArgumentException('non-nullable name cannot be null');
@@ -568,9 +658,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets version
      *
-     * @return string|null
+     * @return string
      */
-    public function getVersion(): ?string
+    public function getVersion(): string
     {
         return $this->container['version'];
     }
@@ -578,11 +668,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets version
      *
-     * @param string|null $version version
+     * @param string $version version
      *
      * @return $this
      */
-    public function setVersion(?string $version): static
+    public function setVersion(string $version): static
     {
         if (is_null($version)) {
             throw new InvalidArgumentException('non-nullable version cannot be null');
@@ -595,9 +685,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets html_url
      *
-     * @return string|null
+     * @return string
      */
-    public function getHtmlUrl(): ?string
+    public function getHtmlUrl(): string
     {
         return $this->container['html_url'];
     }
@@ -605,11 +695,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets html_url
      *
-     * @param string|null $html_url html_url
+     * @param string $html_url html_url
      *
      * @return $this
      */
-    public function setHtmlUrl(?string $html_url): static
+    public function setHtmlUrl(string $html_url): static
     {
         if (is_null($html_url)) {
             throw new InvalidArgumentException('non-nullable html_url cannot be null');
@@ -622,9 +712,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets tagline
      *
-     * @return string|null
+     * @return string
      */
-    public function getTagline(): ?string
+    public function getTagline(): string
     {
         return $this->container['tagline'];
     }
@@ -632,11 +722,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets tagline
      *
-     * @param string|null $tagline tagline
+     * @param string $tagline tagline
      *
      * @return $this
      */
-    public function setTagline(?string $tagline): static
+    public function setTagline(string $tagline): static
     {
         if (is_null($tagline)) {
             throw new InvalidArgumentException('non-nullable tagline cannot be null');
@@ -649,9 +739,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets artifact_url
      *
-     * @return string|null
+     * @return string
      */
-    public function getArtifactUrl(): ?string
+    public function getArtifactUrl(): string
     {
         return $this->container['artifact_url'];
     }
@@ -659,11 +749,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets artifact_url
      *
-     * @param string|null $artifact_url artifact_url
+     * @param string $artifact_url artifact_url
      *
      * @return $this
      */
-    public function setArtifactUrl(?string $artifact_url): static
+    public function setArtifactUrl(string $artifact_url): static
     {
         if (is_null($artifact_url)) {
             throw new InvalidArgumentException('non-nullable artifact_url cannot be null');
@@ -676,9 +766,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets downloads
      *
-     * @return int|null
+     * @return int
      */
-    public function getDownloads(): ?int
+    public function getDownloads(): int
     {
         return $this->container['downloads'];
     }
@@ -686,11 +776,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets downloads
      *
-     * @param int|null $downloads downloads
+     * @param int $downloads downloads
      *
      * @return $this
      */
-    public function setDownloads(?int $downloads): static
+    public function setDownloads(int $downloads): static
     {
         if (is_null($downloads)) {
             throw new InvalidArgumentException('non-nullable downloads cannot be null');
@@ -703,9 +793,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets score
      *
-     * @return int|null
+     * @return int
      */
-    public function getScore(): ?int
+    public function getScore(): int
     {
         return $this->container['score'];
     }
@@ -713,11 +803,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets score
      *
-     * @param int|null $score score
+     * @param int $score score
      *
      * @return $this
      */
-    public function setScore(?int $score): static
+    public function setScore(int $score): static
     {
         if (is_null($score)) {
             throw new InvalidArgumentException('non-nullable score cannot be null');
@@ -730,9 +820,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets repo_id
      *
-     * @return int|null
+     * @return int
      */
-    public function getRepoId(): ?int
+    public function getRepoId(): int
     {
         return $this->container['repo_id'];
     }
@@ -740,11 +830,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets repo_id
      *
-     * @param int|null $repo_id repo_id
+     * @param int $repo_id repo_id
      *
      * @return $this
      */
-    public function setRepoId(?int $repo_id): static
+    public function setRepoId(int $repo_id): static
     {
         if (is_null($repo_id)) {
             throw new InvalidArgumentException('non-nullable repo_id cannot be null');
@@ -757,9 +847,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets repo_name
      *
-     * @return string|null
+     * @return string
      */
-    public function getRepoName(): ?string
+    public function getRepoName(): string
     {
         return $this->container['repo_name'];
     }
@@ -767,11 +857,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets repo_name
      *
-     * @param string|null $repo_name repo_name
+     * @param string $repo_name repo_name
      *
      * @return $this
      */
-    public function setRepoName(?string $repo_name): static
+    public function setRepoName(string $repo_name): static
     {
         if (is_null($repo_name)) {
             throw new InvalidArgumentException('non-nullable repo_name cannot be null');
@@ -784,9 +874,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets project_id
      *
-     * @return int|null
+     * @return int
      */
-    public function getProjectId(): ?int
+    public function getProjectId(): int
     {
         return $this->container['project_id'];
     }
@@ -794,11 +884,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets project_id
      *
-     * @param int|null $project_id project_id
+     * @param int $project_id project_id
      *
      * @return $this
      */
-    public function setProjectId(?int $project_id): static
+    public function setProjectId(int $project_id): static
     {
         if (is_null($project_id)) {
             throw new InvalidArgumentException('non-nullable project_id cannot be null');
@@ -811,9 +901,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets project_name
      *
-     * @return string|null
+     * @return string
      */
-    public function getProjectName(): ?string
+    public function getProjectName(): string
     {
         return $this->container['project_name'];
     }
@@ -821,11 +911,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets project_name
      *
-     * @param string|null $project_name project_name
+     * @param string $project_name project_name
      *
      * @return $this
      */
-    public function setProjectName(?string $project_name): static
+    public function setProjectName(string $project_name): static
     {
         if (is_null($project_name)) {
             throw new InvalidArgumentException('non-nullable project_name cannot be null');
@@ -838,9 +928,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets build_id
      *
-     * @return int|null
+     * @return int
      */
-    public function getBuildId(): ?int
+    public function getBuildId(): int
     {
         return $this->container['build_id'];
     }
@@ -848,11 +938,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets build_id
      *
-     * @param int|null $build_id build_id
+     * @param int $build_id build_id
      *
      * @return $this
      */
-    public function setBuildId(?int $build_id): static
+    public function setBuildId(int $build_id): static
     {
         if (is_null($build_id)) {
             throw new InvalidArgumentException('non-nullable build_id cannot be null');
@@ -865,9 +955,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets build_number
      *
-     * @return int|null
+     * @return int
      */
-    public function getBuildNumber(): ?int
+    public function getBuildNumber(): int
     {
         return $this->container['build_number'];
     }
@@ -875,11 +965,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets build_number
      *
-     * @param int|null $build_number build_number
+     * @param int $build_number build_number
      *
      * @return $this
      */
-    public function setBuildNumber(?int $build_number): static
+    public function setBuildNumber(int $build_number): static
     {
         if (is_null($build_number)) {
             throw new InvalidArgumentException('non-nullable build_number cannot be null');
@@ -892,9 +982,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets build_commit
      *
-     * @return string|null
+     * @return string
      */
-    public function getBuildCommit(): ?string
+    public function getBuildCommit(): string
     {
         return $this->container['build_commit'];
     }
@@ -902,11 +992,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets build_commit
      *
-     * @param string|null $build_commit build_commit
+     * @param string $build_commit build_commit
      *
      * @return $this
      */
-    public function setBuildCommit(?string $build_commit): static
+    public function setBuildCommit(string $build_commit): static
     {
         if (is_null($build_commit)) {
             throw new InvalidArgumentException('non-nullable build_commit cannot be null');
@@ -919,9 +1009,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets description_url
      *
-     * @return string|null
+     * @return string
      */
-    public function getDescriptionUrl(): ?string
+    public function getDescriptionUrl(): string
     {
         return $this->container['description_url'];
     }
@@ -929,11 +1019,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets description_url
      *
-     * @param string|null $description_url description_url
+     * @param string $description_url description_url
      *
      * @return $this
      */
-    public function setDescriptionUrl(?string $description_url): static
+    public function setDescriptionUrl(string $description_url): static
     {
         if (is_null($description_url)) {
             throw new InvalidArgumentException('non-nullable description_url cannot be null');
@@ -946,9 +1036,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets icon_url
      *
-     * @return string|null
+     * @return string
      */
-    public function getIconUrl(): ?string
+    public function getIconUrl(): string
     {
         return $this->container['icon_url'];
     }
@@ -956,11 +1046,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets icon_url
      *
-     * @param string|null $icon_url icon_url
+     * @param string $icon_url icon_url
      *
      * @return $this
      */
-    public function setIconUrl(?string $icon_url): static
+    public function setIconUrl(string $icon_url): static
     {
         if (is_null($icon_url)) {
             throw new InvalidArgumentException('non-nullable icon_url cannot be null');
@@ -1054,9 +1144,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets is_obsolete
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getIsObsolete(): ?bool
+    public function getIsObsolete(): bool
     {
         return $this->container['is_obsolete'];
     }
@@ -1064,11 +1154,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets is_obsolete
      *
-     * @param bool|null $is_obsolete is_obsolete
+     * @param bool $is_obsolete is_obsolete
      *
      * @return $this
      */
-    public function setIsObsolete(?bool $is_obsolete): static
+    public function setIsObsolete(bool $is_obsolete): static
     {
         if (is_null($is_obsolete)) {
             throw new InvalidArgumentException('non-nullable is_obsolete cannot be null');
@@ -1081,9 +1171,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets is_pre_release
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getIsPreRelease(): ?bool
+    public function getIsPreRelease(): bool
     {
         return $this->container['is_pre_release'];
     }
@@ -1091,11 +1181,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets is_pre_release
      *
-     * @param bool|null $is_pre_release is_pre_release
+     * @param bool $is_pre_release is_pre_release
      *
      * @return $this
      */
-    public function setIsPreRelease(?bool $is_pre_release): static
+    public function setIsPreRelease(bool $is_pre_release): static
     {
         if (is_null($is_pre_release)) {
             throw new InvalidArgumentException('non-nullable is_pre_release cannot be null');
@@ -1108,9 +1198,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets is_outdated
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getIsOutdated(): ?bool
+    public function getIsOutdated(): bool
     {
         return $this->container['is_outdated'];
     }
@@ -1118,11 +1208,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets is_outdated
      *
-     * @param bool|null $is_outdated is_outdated
+     * @param bool $is_outdated is_outdated
      *
      * @return $this
      */
-    public function setIsOutdated(?bool $is_outdated): static
+    public function setIsOutdated(bool $is_outdated): static
     {
         if (is_null($is_outdated)) {
             throw new InvalidArgumentException('non-nullable is_outdated cannot be null');
@@ -1135,9 +1225,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets is_official
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getIsOfficial(): ?bool
+    public function getIsOfficial(): bool
     {
         return $this->container['is_official'];
     }
@@ -1145,11 +1235,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets is_official
      *
-     * @param bool|null $is_official is_official
+     * @param bool $is_official is_official
      *
      * @return $this
      */
-    public function setIsOfficial(?bool $is_official): static
+    public function setIsOfficial(bool $is_official): static
     {
         if (is_null($is_official)) {
             throw new InvalidArgumentException('non-nullable is_official cannot be null');
@@ -1162,9 +1252,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets submission_date
      *
-     * @return int|null
+     * @return int
      */
-    public function getSubmissionDate(): ?int
+    public function getSubmissionDate(): int
     {
         return $this->container['submission_date'];
     }
@@ -1172,11 +1262,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets submission_date
      *
-     * @param int|null $submission_date Date as unix timestamp
+     * @param int $submission_date Date as unix timestamp
      *
      * @return $this
      */
-    public function setSubmissionDate(?int $submission_date): static
+    public function setSubmissionDate(int $submission_date): static
     {
         if (is_null($submission_date)) {
             throw new InvalidArgumentException('non-nullable submission_date cannot be null');
@@ -1189,9 +1279,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets state
      *
-     * @return \Aternos\PoggitApi\Model\State|null
+     * @return \Aternos\PoggitApi\Model\State
      */
-    public function getState(): ?\Aternos\PoggitApi\Model\State
+    public function getState(): \Aternos\PoggitApi\Model\State
     {
         return $this->container['state'];
     }
@@ -1199,11 +1289,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets state
      *
-     * @param \Aternos\PoggitApi\Model\State|null $state state
+     * @param \Aternos\PoggitApi\Model\State $state state
      *
      * @return $this
      */
-    public function setState(?\Aternos\PoggitApi\Model\State $state): static
+    public function setState(\Aternos\PoggitApi\Model\State $state): static
     {
         if (is_null($state)) {
             throw new InvalidArgumentException('non-nullable state cannot be null');
@@ -1214,28 +1304,28 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     }
 
     /**
-     * Gets last_changed_date
+     * Gets last_state_change_date
      *
-     * @return int|null
+     * @return int
      */
-    public function getLastChangedDate(): ?int
+    public function getLastStateChangeDate(): int
     {
-        return $this->container['last_changed_date'];
+        return $this->container['last_state_change_date'];
     }
 
     /**
-     * Sets last_changed_date
+     * Sets last_state_change_date
      *
-     * @param int|null $last_changed_date Date as unix timestamp
+     * @param int $last_state_change_date Date as unix timestamp
      *
      * @return $this
      */
-    public function setLastChangedDate(?int $last_changed_date): static
+    public function setLastStateChangeDate(int $last_state_change_date): static
     {
-        if (is_null($last_changed_date)) {
-            throw new InvalidArgumentException('non-nullable last_changed_date cannot be null');
+        if (is_null($last_state_change_date)) {
+            throw new InvalidArgumentException('non-nullable last_state_change_date cannot be null');
         }
-        $this->container['last_changed_date'] = $last_changed_date;
+        $this->container['last_state_change_date'] = $last_state_change_date;
 
         return $this;
     }
@@ -1243,9 +1333,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets categories
      *
-     * @return \Aternos\PoggitApi\Model\CategoryName[]|null
+     * @return \Aternos\PoggitApi\Model\CategoryName[]
      */
-    public function getCategories(): ?array
+    public function getCategories(): array
     {
         return $this->container['categories'];
     }
@@ -1253,11 +1343,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets categories
      *
-     * @param \Aternos\PoggitApi\Model\CategoryName[]|null $categories categories
+     * @param \Aternos\PoggitApi\Model\CategoryName[] $categories categories
      *
      * @return $this
      */
-    public function setCategories(?array $categories): static
+    public function setCategories(array $categories): static
     {
         if (is_null($categories)) {
             throw new InvalidArgumentException('non-nullable categories cannot be null');
@@ -1270,9 +1360,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets keywords
      *
-     * @return string[]|null
+     * @return string[]
      */
-    public function getKeywords(): ?array
+    public function getKeywords(): array
     {
         return $this->container['keywords'];
     }
@@ -1280,11 +1370,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets keywords
      *
-     * @param string[]|null $keywords keywords
+     * @param string[] $keywords keywords
      *
      * @return $this
      */
-    public function setKeywords(?array $keywords): static
+    public function setKeywords(array $keywords): static
     {
         if (is_null($keywords)) {
             throw new InvalidArgumentException('non-nullable keywords cannot be null');
@@ -1297,9 +1387,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets api
      *
-     * @return \Aternos\PoggitApi\Model\ReleaseApiInner[]|null
+     * @return \Aternos\PoggitApi\Model\ReleaseApiInner[]
      */
-    public function getApi(): ?array
+    public function getApi(): array
     {
         return $this->container['api'];
     }
@@ -1307,11 +1397,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets api
      *
-     * @param \Aternos\PoggitApi\Model\ReleaseApiInner[]|null $api api
+     * @param \Aternos\PoggitApi\Model\ReleaseApiInner[] $api api
      *
      * @return $this
      */
-    public function setApi(?array $api): static
+    public function setApi(array $api): static
     {
         if (is_null($api)) {
             throw new InvalidArgumentException('non-nullable api cannot be null');
@@ -1324,9 +1414,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets deps
      *
-     * @return \Aternos\PoggitApi\Model\Dependency[]|null
+     * @return \Aternos\PoggitApi\Model\Dependency[]
      */
-    public function getDeps(): ?array
+    public function getDeps(): array
     {
         return $this->container['deps'];
     }
@@ -1334,11 +1424,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets deps
      *
-     * @param \Aternos\PoggitApi\Model\Dependency[]|null $deps deps
+     * @param \Aternos\PoggitApi\Model\Dependency[] $deps deps
      *
      * @return $this
      */
-    public function setDeps(?array $deps): static
+    public function setDeps(array $deps): static
     {
         if (is_null($deps)) {
             throw new InvalidArgumentException('non-nullable deps cannot be null');
@@ -1351,9 +1441,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets producers
      *
-     * @return \Aternos\PoggitApi\Model\ReleaseProducers|null
+     * @return \Aternos\PoggitApi\Model\ReleaseProducers
      */
-    public function getProducers(): ?\Aternos\PoggitApi\Model\ReleaseProducers
+    public function getProducers(): \Aternos\PoggitApi\Model\ReleaseProducers
     {
         return $this->container['producers'];
     }
@@ -1361,11 +1451,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets producers
      *
-     * @param \Aternos\PoggitApi\Model\ReleaseProducers|null $producers producers
+     * @param \Aternos\PoggitApi\Model\ReleaseProducers $producers producers
      *
      * @return $this
      */
-    public function setProducers(?\Aternos\PoggitApi\Model\ReleaseProducers $producers): static
+    public function setProducers(\Aternos\PoggitApi\Model\ReleaseProducers $producers): static
     {
         if (is_null($producers)) {
             throw new InvalidArgumentException('non-nullable producers cannot be null');
@@ -1378,9 +1468,9 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets state_name
      *
-     * @return string|null
+     * @return string
      */
-    public function getStateName(): ?string
+    public function getStateName(): string
     {
         return $this->container['state_name'];
     }
@@ -1388,11 +1478,11 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Sets state_name
      *
-     * @param string|null $state_name state_name
+     * @param string $state_name state_name
      *
      * @return $this
      */
-    public function setStateName(?string $state_name): static
+    public function setStateName(string $state_name): static
     {
         if (is_null($state_name)) {
             throw new InvalidArgumentException('non-nullable state_name cannot be null');
