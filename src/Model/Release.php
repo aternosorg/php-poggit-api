@@ -156,7 +156,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
         'build_number' => false,
         'build_commit' => false,
         'description_url' => false,
-        'icon_url' => false,
+        'icon_url' => true,
         'changelog_url' => false,
         'license' => false,
         'license_url' => false,
@@ -1038,7 +1038,7 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @return string
      */
-    public function getIconUrl(): string
+    public function getIconUrl(): ?string
     {
         return $this->container['icon_url'];
     }
@@ -1050,10 +1050,17 @@ class Release implements ModelInterface, ArrayAccess, JsonSerializable
      *
      * @return $this
      */
-    public function setIconUrl(string $icon_url): static
+    public function setIconUrl(?string $icon_url): static
     {
         if (is_null($icon_url)) {
-            throw new InvalidArgumentException('non-nullable icon_url cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'icon_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('icon_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['icon_url'] = $icon_url;
 

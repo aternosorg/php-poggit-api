@@ -407,6 +407,7 @@ components:
         icon_url:
           type: string
           format: uri
+          nullable: true
         changelog_url:
           type: string
           format: uri
