@@ -13,7 +13,7 @@ class PoggitAPITestCase extends TestCase
     protected function setUp(): void
     {
         $this->client = new PoggitAPIClient();
-        $this->client->setUserAgent("aternos/php-hangar-api@0.2.0 (contact@aternos.org)");
+        $this->client->setUserAgent("aternos/php-poggit-api@2.0.1 (contact@aternos.org)");
     }
 
 }
